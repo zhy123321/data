@@ -21,9 +21,11 @@ func DbOperation()  {
 	connUrl := dbUser +":"+ dbPassword + "@tcp(" + dbIP + ")/" + dbName + "?charset=utf8"
 	db,err := sql.Open(dbDriver,connUrl)
 	if err != nil {
+		fmt.Println(err.Error())
 		panic("数据库连接错误")
 	}
 	fmt.Println("连接数据库成功")
+
 	Db = db
 }
 

@@ -16,16 +16,19 @@ func (r *RegisterController) Post(){
 	var user models.User
 	err := r.ParseForm(&user)
 	if err != nil{
-		r.Ctx.WriteString("数据解析错误")
+		fmt.Println(err.Error())
 		return
+		r.Ctx.WriteString("数据解析错误")
 	}
 	fmt.Println("数据解析成功")
 	//用户数据保存
-	_, err = user.UserSave()
+	id, err := user.UserSave()
 	if err != nil {
+		fmt.Println(err.Error())
 		r.Ctx.WriteString("用户保存失败")
 		return
 	}
+	fmt.Println(id)
 	//保存成功，跳转登录
 	r.TplName = "login.html"
 }
